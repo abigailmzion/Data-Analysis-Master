@@ -1,0 +1,70 @@
+---
+title: "Abigail Zion Lab 2"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+# Question 1
+
+# What type does each vector hold?
+
+a <- c(1L, "This is a character")
+
+# a holds characters because it holds an integer and a character, and integer is coerced to character
+
+b <- c(TRUE, "Hello World")
+
+# b holds characteristics because it holds a logical and a character, so the logical is coerced to character
+
+c <- c(FALSE, 2)
+
+# by coercian c holds integers, except combing them into a vector actually create double precision numeric values by default
+
+# Question 2
+
+# What do you get after the coercians?  Do any surprise you?  Can you firgure out why?
+
+c.logical <- as.logical(c)
+
+# The 2 in c is converted to TRUE.  It seems as though all numbers except for 0 are TRUE when coerced to logical.  I know this from testing several random number.  It is a guess based on logic.  I am surprised by this.
+
+c.integer <- as.integer(c)
+
+# As expected, FALSE is coerced to 0
+
+c.numeric <- as.numeric(c)
+
+# As expected, FALSE is coerced to 0
+
+c.character <- as.character(c)
+
+# FALSE is coerced to "0" and 2 is coerced to "2".  This expected.
+
+
+d <- -5:5
+d.logical <- as.logical(d)
+
+# d.logical is TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE. This is because -5,...,-1 are TRUE, 0 is FALSE, and 1,...,5 are TRUE.  This expected based upon my previous findings.
+
+# Question 3
+
+v <- c(969, 971:1023)
+
+v.power.sum <- sum(2^v)
+
+# infity
+
+v.power.sum.53 <- sum(2^(v[2:54]))
+
+# 1.797693e+308
+
+v.power.sum.second <- 2^v[1] + sum(2^(v[2:54]))
+
+# 1.797693e+308
+
+# Explain what you found.
+
+# 2^v[1] + sum(2^(v[2:54])) == sum(2^v) outputs FALSE; only the latter is considered infinity.  That is because the infinity cut off in R is 1.797693e+308.  My guess is that R doesn't store enough digits after sum(2^(v[2:54])), so when 2^v[1] is added, it is not large enough to increase 1.797693e+308 at all.
+
